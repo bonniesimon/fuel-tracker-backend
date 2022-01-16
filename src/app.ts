@@ -1,7 +1,8 @@
 import express from "express";
+import logger from "./utils/logger";
 
 const app = express();
 
 app.listen(5000, () => {
-	console.log("App is running!");
+	logger.info(`App is running at `);
 })
