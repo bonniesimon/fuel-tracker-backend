@@ -7,7 +7,6 @@ const app = express();
 /**
  * Middleware: Log every request
  */
-
 app.use((req, res, next) => {
 	logger.info(`METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
@@ -19,6 +18,10 @@ app.use((req, res, next) => {
 })
 
 app.use(express.json());
+
+app.get('/', (req, res) => {
+	res.send("/ endpoint hit");
+});
 
 app.listen(5000, () => {
 	logger.info(`App is running at ${config.server.hostname}:${config.server.port}`);
