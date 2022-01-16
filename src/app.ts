@@ -1,8 +1,11 @@
 import express from "express";
 import logger from "./utils/logger";
 import config from './config/default';
+import connectDb from "./utils/connectDb";
 
 const app = express();
+
+connectDb();
 
 /**
  * Middleware: Log every request
