@@ -20,7 +20,8 @@ const DATABASE = {
 
 const config = {
 	server: SERVER,
-	database: DATABASE
+	database: DATABASE,
+	logLevel: 'info'
 }
 
 
