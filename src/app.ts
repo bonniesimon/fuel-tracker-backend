@@ -2,6 +2,7 @@ import express from "express";
 import logger from "./utils/logger";
 import config from './config/default';
 import connectDb from "./utils/connectDb";
+import router from "./routes";
 
 const app = express();
 
@@ -38,9 +39,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.get('/', (req, res) => {
-	res.send("/ endpoint hit");
-});
+app.use(router);
 
 app.listen(5000, () => {
 	logger.info(`App is running at ${config.server.hostname}:${config.server.port}`);
