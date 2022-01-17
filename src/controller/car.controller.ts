@@ -1,4 +1,3 @@
-import { profile } from "console";
 import {Request, Response} from "express";
 import mongoose from "mongoose";
 import CarModel from "../model/car.model";
@@ -23,4 +22,14 @@ const createCarHandler = async (req: Request, res: Response) => {
 
 }
 
-export {createCarHandler};
+const getAllCarsHandler = async(req: Request, res: Response) => {
+	try{
+		const result = await CarModel.find({});
+		return res.status(200).json(result);
+	}catch(e: any){
+		log.error(e.message);
+		res.status(500).send("Server Error");
+	}
+}
+
+export {createCarHandler, getAllCarsHandler};
