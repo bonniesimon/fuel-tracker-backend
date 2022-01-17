@@ -37,7 +37,7 @@ const getAllFuelEntryHandler = async (req: Request, res: Response) => {
 }
 
 const getFuelEntryByCarID = async(req: Request, res: Response) => {
-	const {caridFromURLParam} = req.params;
+	const caridFromURLParam  = req.params.carid;
 
 	try{
 		const result = await FuelEntryModel.find({carID: caridFromURLParam});
