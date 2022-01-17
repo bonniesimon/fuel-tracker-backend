@@ -36,4 +36,16 @@ const getAllFuelEntryHandler = async (req: Request, res: Response) => {
 	}
 }
 
-export {createFuelEntryHandler, getAllFuelEntryHandler};
+const getFuelEntryByCarID = async(req: Request, res: Response) => {
+	const {caridFromURLParam} = req.params;
+
+	try{
+		const result = await FuelEntryModel.find({carID: caridFromURLParam});
+		return res.status(200).json(result);
+	}catch(e: any){
+		log.error(e.message);
+		return res.status(500).send("Server Error");
+	}
+}
+
+export {createFuelEntryHandler, getAllFuelEntryHandler, getFuelEntryByCarID};
