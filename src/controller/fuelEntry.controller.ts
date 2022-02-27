@@ -1,4 +1,5 @@
 import {Request, Response} from "express";
+import mongoose from "mongoose";
 import FuelEntryModel from "../model/fuelEntry.model";
 import log from "../utils/logger";
 
@@ -48,4 +49,16 @@ const getFuelEntryByCarID = async(req: Request, res: Response) => {
 	}
 }
 
-export {createFuelEntryHandler, getAllFuelEntryHandler, getFuelEntryByCarID};
+const deleteFuelEntryHandler = async(req: Request, res: Response) => {
+	const fuelEntryID = req.params.fuelentryid;
+	try{
+		const result = await FuelEntryModel.findOneAndDelete({_id: fuelEntryID});
+		console.log(result);
+		return res.status(200).send(result);
+	}catch(e: any){
+		log.error(e.message);
+		return res.status(500).json("Server Error");
+	}
+}
+
+export {createFuelEntryHandler, getAllFuelEntryHandler, getFuelEntryByCarID, deleteFuelEntryHandler};
