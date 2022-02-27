@@ -25,7 +25,17 @@ To Build
 ```bash
     yarn build
 ```
-    
+
+## API Endpoints
+
+| METHOD | ENDPOINT |
+| ------- | ------ |
+| GET |  /api/car/all  |
+| POST  | /api/car/create  |
+| GET  | /api/fuelentry/all | 
+| POST  | /api/fuelentry/create   |
+| GET  | /api/fuelentry/:carid  |
+| DELETE  | /api/fuelentry/delete/:fuelentryid  |
 
 ## Authors
 
