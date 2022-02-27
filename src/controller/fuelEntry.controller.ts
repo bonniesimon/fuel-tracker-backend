@@ -53,6 +53,9 @@ const deleteFuelEntryHandler = async(req: Request, res: Response) => {
 	const fuelEntryID = req.params.fuelentryid;
 	try{
 		const result = await FuelEntryModel.findOneAndDelete({_id: fuelEntryID});
+		if(!result) {
+			return res.status(404).json({message: "Given resource not found"});
+		}
 		console.log(result);
 		return res.status(200).send(result);
 	}catch(e: any){
