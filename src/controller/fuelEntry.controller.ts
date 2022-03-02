@@ -56,7 +56,6 @@ const deleteFuelEntryHandler = async(req: Request, res: Response) => {
 		if(!result) {
 			return res.status(404).json({message: "Given resource not found"});
 		}
-		console.log(result);
 		return res.status(200).send(result);
 	}catch(e: any){
 		log.error(e.message);
