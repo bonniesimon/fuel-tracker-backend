@@ -63,4 +63,24 @@ const deleteFuelEntryHandler = async(req: Request, res: Response) => {
 	}
 }
 
-export {createFuelEntryHandler, getAllFuelEntryHandler, getFuelEntryByCarID, deleteFuelEntryHandler};
+const updateFuelEntryHandler = async(req: Request, res: Response) => {
+	const {id, ...reqData} = req.body;
+	try{
+		const result = await FuelEntryModel.updateOne(
+			{_id: id},
+			{
+				$set: reqData,
+				$currentDate: {updatedAt: true}
+			}	
+		);
+
+		console.log(result)
+		return res.status(200).json({...result, updatedValues: {id: id, updatedFields: reqData}});
+	}catch(e: any){
+		log.error(e);
+		return res.status(500).json("Internal Server Error");
+	}
+
+};
+
+export {createFuelEntryHandler, getAllFuelEntryHandler, getFuelEntryByCarID, deleteFuelEntryHandler, updateFuelEntryHandler};
