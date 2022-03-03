@@ -27,7 +27,11 @@ app.use((req, res, next) => {
  * Rules of the API
  */
 app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', ['http://localhost:3000', 'https://fuel-tracker.netlify.app']);
+	const whitelistOrigins: string[] = ['http://localhost:3000', 'https://fuel-tracker.netlify.app'];
+	const origin: any = req.headers.origin;
+	if (whitelistOrigins.includes(origin)) {
+		res.header('Access-Control-Allow-Origin', origin);
+	}
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 	
 	if(req.method == 'OPTIONS'){
