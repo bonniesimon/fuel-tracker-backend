@@ -36,6 +36,7 @@ To Build
 | POST  | /api/fuelentry/create   |
 | GET  | /api/fuelentry/:carid  |
 | DELETE  | /api/fuelentry/delete/:fuelentryid  |
+| PATCH  | /api/fuelentry/update |
 
 ## Authors
 
