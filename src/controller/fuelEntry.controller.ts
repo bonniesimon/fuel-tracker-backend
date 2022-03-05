@@ -63,6 +63,10 @@ const deleteFuelEntryHandler = async(req: Request, res: Response) => {
 	}
 }
 
+/*
+*	TODO: Check if update successfull using result. 
+*	Also update the response object to only include the udpatedValues
+*/
 const updateFuelEntryHandler = async(req: Request, res: Response) => {
 	const {id, ...reqData} = req.body;
 	try{
