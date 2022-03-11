@@ -30,8 +30,8 @@ const BCRYPT = {
 }
 
 const JWT = {
-	jwt_accesstoken_secret : JWT_ACCESSTOKEN_SECRET,
-	jwt_refreshtoken_secret : JWT_REFRESHTOKEN_SECRET,
+	jwt_accesstoken_secret : JWT_ACCESSTOKEN_SECRET as string,
+	jwt_refreshtoken_secret : JWT_REFRESHTOKEN_SECRET as string,
 	jwt_accesstoken_expires_in : JWT_ACCESSTOKEN_EXPIRES_IN,
 	jwt_refreshtoken_expires_in : JWT_REFRESHTOKEN_EXPIRES_IN
 }
