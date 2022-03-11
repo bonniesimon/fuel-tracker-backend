@@ -14,6 +14,8 @@ const JWT_REFRESHTOKEN_SECRET = process.env.JWT_REFRESHTOKEN_SECRET;
 const JWT_ACCESSTOKEN_EXPIRES_IN = process.env.JWT_ACCESSTOKEN_EXPIRES_IN;
 const JWT_REFRESHTOKEN_EXPIRES_IN = process.env.JWT_REFRESHTOKEN_EXPIRES_IN;
 
+const BCRYPT_HASH_ROUNDS = process.env.BCRYPT_HASH_ROUNDS;
+
 const SERVER = {
 	hostname: SERVER_HOSTNAME,
 	port: SERVER_PORT
@@ -21,6 +23,10 @@ const SERVER = {
 
 const DATABASE = {
 	uri: MONGODB_URI
+}
+
+const BCRYPT = {
+	hashRounds: BCRYPT_HASH_ROUNDS as string | number
 }
 
 const JWT = {
@@ -33,6 +39,7 @@ const JWT = {
 const config = {
 	server: SERVER,
 	database: DATABASE,
+	bcrypt: BCRYPT,
 	jwt: JWT,
 	logLevel: 'info'
 }

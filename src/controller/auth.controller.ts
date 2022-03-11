@@ -16,7 +16,7 @@ const registerUser = async (req: Request, res: Response) => {
 		error: "User already exists."
 	});
 	
-	const hashedPassword = bcrypt.hashSync(password, 8);
+	const hashedPassword = bcrypt.hashSync(password, config.bcrypt.hashRounds);
 	
 	try {
 		const newUser = new UserModel({
