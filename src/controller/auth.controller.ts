@@ -36,7 +36,17 @@ const registerUser = async (req: Request, res: Response) => {
 const loginUser = async(req: Request, res: Response) => {
 	const {email, password} = req.body;
 
-	return res.status(200).json({status: "success", data: "Route working"});
+	const user = await UserModel.findOne({email: email});
+	
+	if(!user || !(bcrypt.compareSync(password, user.password))){
+		return res.status(401).json({status: "fail", error: "Email or Password is wrong"});
+	}
+
+	
+
+	return res.status(200).json({status: "success", data: {
+		user: {fullName: user.fullName, email: user.email}
+	}});
 }
 
 
