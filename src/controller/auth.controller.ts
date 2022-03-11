@@ -33,4 +33,11 @@ const registerUser = async (req: Request, res: Response) => {
 };
 
 
-export {registerUser};
+const loginUser = async(req: Request, res: Response) => {
+	const {email, password} = req.body;
+
+	return res.status(200).json({status: "success", data: "Route working"});
+}
+
+
+export {registerUser, loginUser};
