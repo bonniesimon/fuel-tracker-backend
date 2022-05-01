@@ -29,7 +29,7 @@ const createFuelEntryHandler = async (req:Request, res: Response) => {
 
 const getAllFuelEntryHandler = async (req: Request, res: Response) => {
 	try{
-		const result = await FuelEntryModel.find({});
+		const result = await FuelEntryModel.find({}).sort({entryDate: -1});
 		return res.status(200).json(result);
 	}catch(e: any){
 		log.error(e.message);
@@ -41,7 +41,7 @@ const getFuelEntryByCarID = async(req: Request, res: Response) => {
 	const caridFromURLParam  = req.params.carid;
 
 	try{
-		const result = await FuelEntryModel.find({carID: caridFromURLParam});
+		const result = await FuelEntryModel.find({carID: caridFromURLParam}).sort({entryDate: -1});
 		return res.status(200).json(result);
 	}catch(e: any){
 		log.error(e.message);
