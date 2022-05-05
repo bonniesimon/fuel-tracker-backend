@@ -3,7 +3,7 @@ import UserModel from "../model/user.model";
 import bcrypt from "bcrypt";
 import log from "../utils/logger";
 import config from "../config/default";
-import { generateAccessToken, generateRefreshToken } from "../utils/token";
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../utils/token";
 
 
 const registerUser = async (req: Request, res: Response) => {
@@ -53,5 +53,35 @@ const loginUser = async(req: Request, res: Response) => {
 	}});
 }
 
+const refreshToken = async (req: Request, res: Response) => {
+	const { refreshToken } = req.body;
+	try {
+		const decoded: any = verifyRefreshToken(refreshToken);
 
-export {registerUser, loginUser};
+		const newAccessToken = generateAccessToken({fullName: decoded.fullName, email: decoded.emai});
+		const newRefreshToken = generateRefreshToken({fullName: decoded.fullName, email: decoded.emai});
+
+		return res.status(200).json({
+			status: "OK",
+			message: "Tokens generated successfully",
+			data: {
+				user: {fullName: decoded.fullName, email: decoded.emai},
+				jwtTokens: {newAccessToken, newRefreshToken}
+			}
+		})
+	} catch (error: any) {
+		if (error.name === "JsonWebTokenError" && error.message === "invalid signature") {
+			return res.status(401).json({
+				status: "Fail",
+				message: "Invalid refresh token"
+			});
+		}
+		return res.status(500).json({
+			status: "Error",
+			message: "Internal Server Error",
+		});
+	}
+	return ;
+}
+
+export {registerUser, loginUser, refreshToken};
