@@ -1,7 +1,7 @@
 import express from 'express';
 import car from '../routes/car.routes';
 import fuelEntry from '../routes/fuelEntry.routes';
-import auth from '../routes/auth.routes';
+import authRoutes from '../routes/auth.routes';
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ router.get("/healthcheck", (_, res) => {
 /**
  * Auth Routes
  */
-router.use(auth);
+router.use(authRoutes);
 /**
  * /api/cars
  */
