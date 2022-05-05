@@ -2,6 +2,7 @@ import express from 'express';
 import car from '../routes/car.routes';
 import fuelEntry from '../routes/fuelEntry.routes';
 import authRoutes from '../routes/auth.routes';
+import auth from '../middleware/auth.middleware';
 
 const router = express.Router();
 
@@ -20,12 +21,12 @@ router.use(authRoutes);
 /**
  * /api/cars
  */
-router.use(car);
+router.use(car, auth);
 
 /**
  * /api/fuelentries
  */
-router.use(fuelEntry);
+router.use(fuelEntry, auth);
 
 
 export default router;
