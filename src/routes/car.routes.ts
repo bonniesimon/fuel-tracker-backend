@@ -1,4 +1,4 @@
-import express, {Request, Response} from "express";
+import express from "express";
 import {createCarHandler, getAllCarsHandler} from "../controller/car.controller";
 
 const router = express.Router();
