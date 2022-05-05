@@ -1,9 +1,9 @@
 import {Request, Response} from "express";
 import UserModel from "../model/user.model";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import log from "../utils/logger";
 import config from "../config/default";
+import { generateAccessToken, generateRefreshToken } from "../utils/token";
 
 
 const registerUser = async (req: Request, res: Response) => {
@@ -44,8 +44,8 @@ const loginUser = async(req: Request, res: Response) => {
 		return res.status(401).json({status: "fail", error: "Email or Password is wrong"});
 	}
 
-	const accessToken = jwt.sign({fullName: user.fullName, email: user.email}, config.jwt.jwt_accesstoken_secret, {expiresIn: config.jwt.jwt_accesstoken_expires_in});
-	const refreshToken = jwt.sign({fullName: user.fullName, email: user.email}, config.jwt.jwt_refreshtoken_secret, {expiresIn: config.jwt.jwt_refreshtoken_expires_in});
+	const accessToken = generateAccessToken(user);
+	const refreshToken = generateRefreshToken(user);
 
 	return res.status(200).json({status: "success", data: {
 		user: {fullName: user.fullName, email: user.email},
