@@ -22,4 +22,11 @@ const generateRefreshToken = (user: User) => {
     )
 }
 
-export {generateAccessToken, generateRefreshToken};
+const verifyRefreshToken = (refreshToken: string) => {
+    return jwt.verify(
+        refreshToken,
+        config.jwt.jwt_refreshtoken_secret
+    );
+}
+
+export {generateAccessToken, generateRefreshToken, verifyRefreshToken};
