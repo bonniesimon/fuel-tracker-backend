@@ -29,4 +29,11 @@ const verifyRefreshToken = (refreshToken: string) => {
     );
 }
 
-export {generateAccessToken, generateRefreshToken, verifyRefreshToken};
+const verifyAccessToken = (accessToken: string) => {
+    return jwt.verify(
+        accessToken,
+        config.jwt.jwt_accesstoken_secret
+    );
+}
+
+export {generateAccessToken, generateRefreshToken, verifyRefreshToken, verifyAccessToken};
